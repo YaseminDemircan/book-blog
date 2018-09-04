@@ -1,0 +1,18 @@
+﻿@using BookBlogMVC.Models;
+@model IEnumerable<Kategori>
+
+    <div class="well">
+        <h3><b>Kategoriler</b></h3>
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                    @foreach (Kategori kategori in Model)
+                    {
+                    <li>
+                        <a href="/Home/KategoriMakale/@kategori.KategoriId"><h4><b>@kategori.Adi</b></h4></a>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>

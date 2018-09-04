@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BookBlogMVC.Models.Kategori>
+
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Yeni Ekle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Kategori Adı
+        </th>
+        <th>
+           Açıklama
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aciklama)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.KategoriId }) |
+            @Html.ActionLink("Detay", "Details", new { id=item.KategoriId }) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.KategoriId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,186 @@
+﻿@using BookBlogMVC.Models;
+@model Article
+
+@{
+    ViewBag.Title = Model.Baslik;
+}
+
+@section head{
+    <script src="~/Contents/jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).ready(function myfunction() {
+            $.ajax({
+                url: '/Home/Goruntuleme/',
+                data: { Makaleid:@Model.MakaleId },
+                type:'POST',
+                });
+            })
+
+        $(document).ready(function commentfunction() {
+            $("#gonder").click(function commentfunction() {
+                var yorumunuz = $("#message").val();
+                $.ajax({
+                    url: '/Home/YorumYap/',
+                    data: { yorum: yorumunuz, Makaleid: @Model.MakaleId},
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function commentfunction(data) {
+                        alert("Yorum gönderildi");
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+
+<!--Breadcrumbs-->
+<div class="col-lg-12 top2">
+    <div class="container">
+        <ul class="breadcrumb">
+
+            <li><a href="/Home/Index">Anasayfa</a></li>
+            <li><a href="/Home/KategoriMakale/@Model.KategoriID">@Model.Kategori.Adi</a></li>
+            <li class="active">@Model.Baslik</li>
+
+        </ul>
+    </div>
+
+</div>
+<!--Breadcrumbs-->
+<!--ArticleStarts-->
+<div class="col-md-12">
+    <h1><b>@Model.Baslik</b></h1>
+    <div class="entry-meta table">
+        @*<span><a href="/Home/KategoriMakale/@Model.KategoriID">@Model.Kategori.Adi</a></span>
+            <span> / </span>
+            <span>@Model.EklenmeTarihi.Value.ToShortDateString()</span>*@
+    </div>
+    <div class="media">
+        <h3>@Model.Giris</h3>
+    </div>
+    <div>
+        <img src="@Model.Resim.BuyukBoyut" class="img-responsive" alt="" width="700">
+    </div>
+    <div class="media">
+        <h3>@Model.Gelisme</h3>
+    </div>
+    <br />
+    <div class="media">
+        <h3>@Model.Sonuc</h3>
+    </div>
+</div>
+<!--ArticleEnds-->
+<!--AuthorStarts-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+
+            <section class="comment-list">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                        <figure class="thumbnail">
+                            <a href="/Home/YazarMakale/@Model.Yazar.YazarId">
+                                <img class="img-responsive" src="@Model.Yazar.Resim.KucukBoyut">
+                                <figcaption class="text-center">@Model.Yazar.Adi @Model.Yazar.Soyadi</figcaption>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                        <div class="panel panel-default arrow left">
+                            <div class="panel-body">
+                                <form>
+                                    <div>
+                                        <span><b>@Model.Yazar.Adi @Model.Yazar.Soyadi Hakkında</b></span>
+                                    </div>
+                                    <div>
+                                        <span>@Model.Yazar.Hakkinda</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!--AuthorEnds-->
+<div class="col-md-8">
+    <h2 class="page-header">@Model.Yorums.Count Yorum</h2>
+    <section class="comment-list">
+        <!-- First Comment -->
+        @foreach (Yorum yorum in Model.Yorums)
+        {
+            <div class="row">
+                <div class="col-md-2 col-sm-2 hidden-xs">
+                    <figure class="thumbnail">
+                        <img class="img-responsive" src="">
+                        <figcaption class="text-center">---</figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <div class="panel panel-default arrow left">
+                        <div class="panel-body">
+                            <header class="text-left">
+                                <div class="comment-user">
+                                   
+                                    <time class="comment-date" datetime="16-12-2014 01:05">&bull;@yorum.EklenmeTarihi.Value.ToShortDateString() </time>
+                                </div>
+                            </header>
+                            <div class="comment-post">
+                                <p>
+                                    @yorum.Yorum1
+                                    @*@if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a href="/Homee/YorumSil/@yorum.YorumId">Sil</a>
+                                    }*@
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+
+                <section class="comment-list">
+                    <div class="row">
+
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+
+                                    <form action="" method="post">
+                                        <div>
+                                            <span>Add A Comment</span>
+                                        </div>
+                                        @*<div>
+                                                <label for="name">
+                                                    <input type="text" id="name" name="AdSoyad" placeholder="İsim Soyisim" />
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label for="email">
+                                                    <input type="text" id="email" name="Email" placeholder="E-posta">
+                                                </label>
+                                            </div>*@
+                                        <div>
+                                            <textarea id="message" name="Yorum" cols="30" rows="10" placeholder="Yorumunuz..."></textarea>
+                                        </div>
+                                        <input id="gonder" type="submit" value="Gönder">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+

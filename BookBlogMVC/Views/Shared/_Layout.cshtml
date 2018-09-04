@@ -1,0 +1,254 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en-gb" class="no-js">
+<!--<![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="author" content="Themesrefinery">
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+            <script type="text/javascript" src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
+    <![endif]-->
+
+    <link href="~/Contents/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Contents/custom.css" rel="stylesheet" />
+    <link href="~/Contents/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Contents/slider.css" rel="stylesheet" />
+    <link href="~/Contents/style-animate.css" rel="stylesheet" />
+    <link href="~/Contents/styles.css" rel="stylesheet" />
+    <style>
+        .dropbtn {
+            background-color: white;
+            color: black;
+            padding: 16px;
+            font-family: 'Times New Roman';
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown1 {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            font-family: 'Times New Roman';
+            background-color: white;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1;
+                }
+
+        .dropdown1:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown1:hover .dropbtn {
+        }
+    </style>
+
+    @RenderSection("head", false)
+</head>
+
+
+<body>
+    <!--Top Header-->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <a href="/Home/Index" class="navbar-brand scroll-top logo animated bounceInLeft rollIn"><b><img src="" width="40" height="40" />Kitaplık Kedisi - Kitap, sanat, müzik, film…</b></a>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav" id="mainNav">
+                        <li><a href="/Home/Index">Anasayfa</a></li>
+
+                        @*@if (User.IsInRole("Yazar"))
+                        {
+                            <li class="dropdown1">
+                                <a href="/Yazar/Index">Yazar Panel</a>
+                                <div class="dropdown-content">
+                                    <a href="/AdminMakale/Index">Makale İşlemleri</a>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="dropdown1">
+                                <a href="/Admin/Index">Admin Paneli</a>
+                                <div class="dropdown-content">
+                                    <a href="/AdminMakale/Index">Makale İşlemleri</a>
+                                    <a href="/AdminKategori/Index">Kategori İşlemleri</a>
+                                    <a href="/Admin/YazarOnaylari">Yazar Onayları</a>
+                                </div>
+                            </li>
+                        }
+                        @if (!User.IsInRole("Yazar") || !User.Identity.IsAuthenticated || !User.IsInRole("Admin"))
+                            {
+                                <li class="dropdown1">
+                                    <a href="/Yazar/YazarOl">Yazar Ol</a>
+                                </li>
+                            }
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown1">
+                                <a href="/Kullanici/UyeOl">KAYDOL</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a href="/Kullanici/Index/@User.Identity.Name.ToString()">@User.Identity.Name.ToString()</a>
+                            </li>
+                            <li>
+                                <a href="/Kullanici/CikisYap?redirectUrl=@this.Request.RawUrl">Çıkış Yap</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="/Kullanici/GirisYap">GİRİŞ YAP</a>
+                            </li>
+                        }*@
+
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-- bullet navigator container -->
+    <div u="navigator" class="jssorb21" style="bottom: 26px; right: 6px;">
+        <!-- bullet navigator item prototype -->
+        <div u="prototype"></div>
+    </div>
+
+
+    <!--Slider Start-->
+    <!--Main Body-->
+    <div class="container">
+        <div class="row">
+            <!--makaleler-->
+            <div class="col-lg-8">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                @RenderBody()
+            </div>
+
+            <!--Sidebar Start-->
+            <div class="col-md-4 top3">
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <!-- Blog Search Well -->
+                    @{
+                        Html.RenderPartial("Arama");
+                    }
+                    <!-- Blog Categories Well -->
+                    @{
+                        Html.RenderAction("Kategori", "Home");
+                    }
+                    <!-- Site About Well -->
+                    @*@{
+                        Html.RenderPartial("SiteHakkinda");
+                    }*@
+                    <!-- Popular Articles Well -->
+                    @{
+                        Html.RenderAction("CokOkunanlar", "Home");
+                    }
+            </div>
+            <!--Sidebar End-->
+
+        </div>
+
+        <!--Footer Start-->
+        @*<footer>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h1>Popular Posts</h1>
+                    <ul class="list-unstyled">
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Like Us</h1>
+                    <div class="fb-page" data-href="https://www.facebook.com/themesrefinery" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/themesrefinery"><a href="https://www.facebook.com/themesrefinery">ThemesRefinery</a></blockquote></div></div>
+                    <div class="text-center">
+                        <a href="https://www.facebook.com/themesrefinery"><i class="fa fa-facebook square"></i></a>
+                        <a href="https://twitter.com/themesrefinery"><i class="fa fa-twitter square"></i></a>
+                        <a href="#"><i class="fa fa-github square"></i></a>
+                        <a href="https://plus.google.com/b/101108467301668768757/+Themesrefinery57/posts"><i class="fa fa-google-plus square"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Recent Posts</h1>
+                    <ul class="list-unstyled">
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                        <li><a href="#">First Post</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-12 top2 bottom2">
+                <div class="text-center">Copy Right &copy; 2015.Design By <a href="http://www.themesrefinery.net/"><i class="fa  fa-file-code">Themesrefinery</i></a></div>
+            </div>
+        </footer>*@
+        <!--Footer End-->
+    </div>
+    <!--Main Body End-->
+
+
+    <script src="~/Contents/bootstrap.min.js"></script>
+    <script src="~/Contents/jquery-1.11.1.min.js"></script>
+    <script src="~/Contents/jssor.js"></script>
+    <script src="~/Contents/jssor.slider.js"></script>
+    <script src="~/Contents/slider.js"></script>
+</body>
+</html>
+
+

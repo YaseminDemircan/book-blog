@@ -1,0 +1,16 @@
+﻿@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("Ara", "Home", FormMethod.Post))
+{
+    <div class="well">
+        <div class="input-group">
+            <input type="text" name="Ara" class="form-control" placeholder="Site içi arama">
+            <span class="input-group-btn">
+                @*<button class="btn btn-default" value="Ara" type="button">
+                </button>*@
+            </span>
+        </div>
+    </div>
+}

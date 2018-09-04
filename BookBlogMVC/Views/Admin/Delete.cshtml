@@ -1,0 +1,104 @@
+﻿@model BookBlogMVC.Models.Article
+
+@{
+    ViewBag.Title = "Sil";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h3>Bunu silmek istediğinize emin misiniz?</h3>
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            Başlık
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baslik)
+        </dd>
+
+        <dt>
+           Giriş
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Giris)
+        </dd>
+
+        <dt>
+           Gelişme
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gelisme)
+        </dd>
+
+        <dt>
+           Sonuç
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sonuc)
+        </dd>
+
+        <dt>
+           Eklenme Tarihi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EklenmeTarihi)
+        </dd>
+
+        <dt>
+            Görüntülenme Sayısı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoruntulenmeSayisi)
+        </dd>
+
+        <dt>
+            Beğeni Sayısı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Begeni)
+        </dd>
+
+        <dt>
+            Kategori
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategori.Adi)
+        </dd>
+
+        <dt>
+           Resim
+        </dt>
+
+        <dd>
+            <img src="@Model.Resim.BuyukBoyut" width="80" />
+        </dd>
+
+        <dt>
+            Yazar
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yazar.Adi)
+            @Html.DisplayFor(model => model.Yazar.Soyadi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-default" /> |
+            @Html.ActionLink("Geri dön", "Index")
+        </div>
+    }
+</div>

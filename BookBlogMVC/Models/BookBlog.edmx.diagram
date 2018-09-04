@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="df3dbc9e8ecb4da3a3ed6e2d793c7ca2" Name="Diagram1">
+        <EntityTypeShape EntityType="BlogMVCdbModel.Article" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.Etiket" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.Kategori" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.Kullanici" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.KullaniciRol" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.Resim" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.Rol" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.Yazar" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogMVCdbModel.Yorum" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Article_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Article_Resim" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Article_Yazar" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Resim_Article" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Yorum_Article" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Kullanici_Resim" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Kullanici_Resim1" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_KullaniciRol_Kullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_KullaniciRol_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.MakaleEtiket" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.YazarTakip" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Yazar_Resim" />
+        <AssociationConnector Association="BlogMVCdbModel.FK_Yorum_Kullanici" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

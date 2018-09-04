@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BookBlogMVC.Models.Article>
+
+@{
+    ViewBag.Title = "Makaleler";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Yeni Ekle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Başlık
+        </th>
+        <th>
+            Giriş
+        </th>
+        <th>
+            Gelişme
+        </th>
+        <th>
+            Sonuç
+        </th>
+        <th>
+            Eklenme Tarihi
+        </th>
+        @*<th>
+            Görüntülenme Sayısı
+        </th>
+        <th>
+            Beğeni Sayısı
+        </th>*@
+        <th>
+           Kategori
+        </th>
+        <th>
+           Resim
+        </th>
+        <th>
+            Yazar
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Baslik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Giris)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gelisme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sonuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EklenmeTarihi)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.GoruntulenmeSayisi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Begeni)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategori.Adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resim.BuyukBoyut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Yazar.Adi)
+            @Html.DisplayFor(modelItem => item.Yazar.Soyadi)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.MakaleId }) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.MakaleId })
+        </td>
+    </tr>
+}
+
+</table>

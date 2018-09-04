@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BlogMVCdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="MakaleId" />
+    </Key>
+    <Property Name="MakaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Baslik" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Giris" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gelisme" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sonuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+    <Property Name="KategoriID" Type="Int32" />
+    <Property Name="GoruntulenmeSayisi" Type="Int32" />
+    <Property Name="Begeni" Type="Int32" />
+    <Property Name="ResimID" Type="Int32" />
+    <Property Name="YazarID" Type="Int32" />
+    <NavigationProperty Name="Kategori" Relationship="Self.FK_Article_Kategori" FromRole="Article" ToRole="Kategori" />
+    <NavigationProperty Name="Resim" Relationship="Self.FK_Article_Resim" FromRole="Article" ToRole="Resim" />
+    <NavigationProperty Name="Yazar" Relationship="Self.FK_Article_Yazar" FromRole="Article" ToRole="Yazar" />
+    <NavigationProperty Name="Resims" Relationship="Self.FK_Resim_Article" FromRole="Article" ToRole="Resim" />
+    <NavigationProperty Name="Yorums" Relationship="Self.FK_Yorum_Article" FromRole="Article" ToRole="Yorum" />
+    <NavigationProperty Name="Etikets" Relationship="Self.MakaleEtiket" FromRole="Article" ToRole="Etiket" />
+  </EntityType>
+  <EntityType Name="Etiket">
+    <Key>
+      <PropertyRef Name="EtiketId" />
+    </Key>
+    <Property Name="EtiketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Articles" Relationship="Self.MakaleEtiket" FromRole="Etiket" ToRole="Article" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Kategori" FromRole="Kategori" ToRole="Article" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="KullaniciId" />
+    </Key>
+    <Property Name="KullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MailAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DogumTarihi" Type="DateTime" Precision="3" />
+    <Property Name="KayıtTarihi" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Parola" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aktif" Type="Boolean" />
+    <Property Name="ResimID" Type="Int32" />
+    <Property Name="Onaylandi" Type="Boolean" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Resim" Relationship="Self.FK_Kullanici_Resim" FromRole="Kullanici" ToRole="Resim" />
+    <NavigationProperty Name="Resim1" Relationship="Self.FK_Kullanici_Resim1" FromRole="Kullanici" ToRole="Resim" />
+    <NavigationProperty Name="KullaniciRols" Relationship="Self.FK_KullaniciRol_Kullanici" FromRole="Kullanici" ToRole="KullaniciRol" />
+    <NavigationProperty Name="Kullanici1" Relationship="Self.YazarTakip" FromRole="Kullanici" ToRole="Kullanici1" />
+    <NavigationProperty Name="Kullanicis" Relationship="Self.YazarTakip" FromRole="Kullanici1" ToRole="Kullanici" />
+    <NavigationProperty Name="Yorums" Relationship="BlogMVCdbModel.FK_Yorum_Kullanici" FromRole="Kullanici" ToRole="Yorum" />
+  </EntityType>
+  <EntityType Name="KullaniciRol">
+    <Key>
+      <PropertyRef Name="RolID" />
+      <PropertyRef Name="KullaniciID" />
+    </Key>
+    <Property Name="KullaniciRolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolID" Type="Int32" Nullable="false" />
+    <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kullanici" Relationship="Self.FK_KullaniciRol_Kullanici" FromRole="KullaniciRol" ToRole="Kullanici" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_KullaniciRol_Rol" FromRole="KullaniciRol" ToRole="Rol" />
+  </EntityType>
+  <EntityType Name="Resim">
+    <Key>
+      <PropertyRef Name="ResimId" />
+    </Key>
+    <Property Name="ResimId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KucukBoyut" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="OrtaBoyut" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BuyukBoyut" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MakaleID" Type="Int32" />
+    <Property Name="Video" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Resim" FromRole="Resim" ToRole="Article" />
+    <NavigationProperty Name="Article" Relationship="Self.FK_Resim_Article" FromRole="Resim" ToRole="Article" />
+    <NavigationProperty Name="Kullanicis" Relationship="Self.FK_Kullanici_Resim" FromRole="Resim" ToRole="Kullanici" />
+    <NavigationProperty Name="Kullanicis1" Relationship="Self.FK_Kullanici_Resim1" FromRole="Resim" ToRole="Kullanici" />
+    <NavigationProperty Name="Yazars" Relationship="BlogMVCdbModel.FK_Yazar_Resim" FromRole="Resim" ToRole="Yazar" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="KullaniciRols" Relationship="Self.FK_KullaniciRol_Rol" FromRole="Rol" ToRole="KullaniciRol" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Yazar">
+    <Key>
+      <PropertyRef Name="YazarId" />
+    </Key>
+    <Property Name="YazarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ResimId" Type="Int32" />
+    <Property Name="Hakkinda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Yazar" FromRole="Yazar" ToRole="Article" />
+    <NavigationProperty Name="Resim" Relationship="BlogMVCdbModel.FK_Yazar_Resim" FromRole="Yazar" ToRole="Resim" />
+  </EntityType>
+  <EntityType Name="Yorum">
+    <Key>
+      <PropertyRef Name="YorumId" />
+    </Key>
+    <Property Name="YorumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Yorum1" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MakaleID" Type="Int32" Nullable="false" />
+    <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Article" Relationship="Self.FK_Yorum_Article" FromRole="Yorum" ToRole="Article" />
+    <Property Name="KullaniciID" Type="Int32" />
+    <NavigationProperty Name="Kullanici" Relationship="BlogMVCdbModel.FK_Yorum_Kullanici" FromRole="Yorum" ToRole="Kullanici" />
+  </EntityType>
+  <Association Name="FK_Article_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KategoriId" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_Resim">
+    <End Role="Resim" Type="Self.Resim" Multiplicity="0..1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="ResimId" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="ResimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_Yazar">
+    <End Role="Yazar" Type="Self.Yazar" Multiplicity="0..1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Yazar">
+        <PropertyRef Name="YazarId" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="YazarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Resim_Article">
+    <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+    <End Role="Resim" Type="Self.Resim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="MakaleId" />
+      </Principal>
+      <Dependent Role="Resim">
+        <PropertyRef Name="MakaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorum_Article">
+    <End Role="Article" Type="Self.Article" Multiplicity="1" />
+    <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="MakaleId" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="MakaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kullanici_Resim">
+    <End Role="Resim" Type="Self.Resim" Multiplicity="0..1" />
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="ResimId" />
+      </Principal>
+      <Dependent Role="Kullanici">
+        <PropertyRef Name="ResimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kullanici_Resim1">
+    <End Role="Resim" Type="Self.Resim" Multiplicity="0..1" />
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="ResimId" />
+      </Principal>
+      <Dependent Role="Kullanici">
+        <PropertyRef Name="ResimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KullaniciRol_Kullanici">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="KullaniciRol" Type="Self.KullaniciRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciId" />
+      </Principal>
+      <Dependent Role="KullaniciRol">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KullaniciRol_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="KullaniciRol" Type="Self.KullaniciRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="KullaniciRol">
+        <PropertyRef Name="RolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MakaleEtiket">
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <End Role="Etiket" Type="Self.Etiket" Multiplicity="*" />
+  </Association>
+  <Association Name="YazarTakip">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+    <End Role="Kullanici1" Type="Self.Kullanici" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="BlogMVCdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articles" EntityType="Self.Article" />
+    <EntitySet Name="Etikets" EntityType="Self.Etiket" />
+    <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+    <EntitySet Name="Kullanicis" EntityType="Self.Kullanici" />
+    <EntitySet Name="KullaniciRols" EntityType="Self.KullaniciRol" />
+    <EntitySet Name="Resims" EntityType="Self.Resim" />
+    <EntitySet Name="Rols" EntityType="Self.Rol" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Yazars" EntityType="Self.Yazar" />
+    <EntitySet Name="Yorums" EntityType="Self.Yorum" />
+    <AssociationSet Name="FK_Article_Kategori" Association="Self.FK_Article_Kategori">
+      <End Role="Kategori" EntitySet="Kategoris" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_Resim" Association="Self.FK_Article_Resim">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_Yazar" Association="Self.FK_Article_Yazar">
+      <End Role="Yazar" EntitySet="Yazars" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Resim_Article" Association="Self.FK_Resim_Article">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="Resim" EntitySet="Resims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorum_Article" Association="Self.FK_Yorum_Article">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="Yorum" EntitySet="Yorums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kullanici_Resim" Association="Self.FK_Kullanici_Resim">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Kullanici" EntitySet="Kullanicis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kullanici_Resim1" Association="Self.FK_Kullanici_Resim1">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Kullanici" EntitySet="Kullanicis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KullaniciRol_Kullanici" Association="Self.FK_KullaniciRol_Kullanici">
+      <End Role="Kullanici" EntitySet="Kullanicis" />
+      <End Role="KullaniciRol" EntitySet="KullaniciRols" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KullaniciRol_Rol" Association="Self.FK_KullaniciRol_Rol">
+      <End Role="Rol" EntitySet="Rols" />
+      <End Role="KullaniciRol" EntitySet="KullaniciRols" />
+    </AssociationSet>
+    <AssociationSet Name="MakaleEtiket" Association="Self.MakaleEtiket">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="Etiket" EntitySet="Etikets" />
+    </AssociationSet>
+    <AssociationSet Name="YazarTakip" Association="Self.YazarTakip">
+      <End Role="Kullanici" EntitySet="Kullanicis" />
+      <End Role="Kullanici1" EntitySet="Kullanicis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yazar_Resim" Association="BlogMVCdbModel.FK_Yazar_Resim">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Yazar" EntitySet="Yazars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorum_Kullanici" Association="BlogMVCdbModel.FK_Yorum_Kullanici">
+      <End Role="Kullanici" EntitySet="Kullanicis" />
+      <End Role="Yorum" EntitySet="Yorums" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Yazar_Resim">
+    <End Type="BlogMVCdbModel.Resim" Role="Resim" Multiplicity="0..1" />
+    <End Type="BlogMVCdbModel.Yazar" Role="Yazar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="ResimId" />
+      </Principal>
+      <Dependent Role="Yazar">
+        <PropertyRef Name="ResimId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorum_Kullanici">
+    <End Type="BlogMVCdbModel.Kullanici" Role="Kullanici" Multiplicity="0..1" />
+    <End Type="BlogMVCdbModel.Yorum" Role="Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciId" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

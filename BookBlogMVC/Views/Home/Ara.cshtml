@@ -1,0 +1,69 @@
+﻿@using BookBlogMVC.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Article>
+
+@{
+    ViewBag.Title ="Arama sonucu - Kitaplık Kedisi";
+}
+
+@helper contentPart(string metin)
+{
+if (metin.Length > 300)
+{
+        @metin.Substring(0, 300)
+}
+else
+{
+        @metin
+}
+}
+
+<div class="col-md-12">
+    @foreach (Article art in Model)
+    {
+        @*<div class="col-md-12">
+            <h2>@ViewBag.Aranan hakkında yazılanlar</h2>
+        </div>*@
+        <div class="col-md-12">
+            <h1><b>@art.Baslik</b></h1>
+            <div class="entry-meta table">
+                <h4>
+                    <span><a href="/Home/YazarMakale/@art.Yazar.YazarId">@art.Yazar.Adi&nbsp;@art.Yazar.Soyadi</a></span>
+                    <span> / </span>
+                    <span><a href="/Home/KategoriMakale/@art.Kategori.KategoriId">@art.Kategori.Adi</a></span>
+                    <span> / </span>
+                    <span>@art.EklenmeTarihi.Value.ToShortDateString()</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><a href="javascript:void(0);">@art.Yorums.Count</a><img src="~/Images/comment.png" /></span>
+                    <span> / </span>
+                    <span><a class="begen" href="javascript:void(0);" data-id="@art.MakaleId">@art.Begeni</a><img src="~/Images/like.png" /></span>
+                    <span> / </span>
+                    <span><a href="javascript:void(0);">@art.GoruntulenmeSayisi</a><img src="~/Images/view.png" /></span>
+                </h4>
+            </div>
+            <div>
+                <a href="/Home/MakaleDetay/@art.MakaleId"><img src="@art.Resim.BuyukBoyut" class="img-responsive" alt="kitaplar"></a>
+            </div>
+            <div class="media">
+                <h4>@contentPart(art.Giris) ...</h4>
+            </div>
+            <div class="read-more padding text-center">
+                <a class="btn btn-default btn-hover" href="/Home/MakaleDetay/@art.MakaleId" role="button">Hepsini Oku</a>
+            </div>
+        </div>
+
+    }
+</div>
+
+<div class="container">
+    <div class="row table">
+        <div class="text-center col-lg-8">
+            <ul class="pagination pagination-responsive pagination-lg">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.Classic)
+            </ul>
+        </div>
+    </div>
+</div>
+
+
